@@ -1,0 +1,13 @@
+.dotnet/
+bin/
+obj/
+artifacts/
+TestResults/
+*.user
+*.suo
+.vs/
+*.pdb
+*.userprefs
+*.zip
+*.sha256
+.gstack/

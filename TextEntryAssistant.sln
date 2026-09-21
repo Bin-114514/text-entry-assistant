@@ -1,0 +1,59 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AA31B39B-48A4-4EA1-B854-6A766658272D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextEntryAssistant.Core", "src\TextEntryAssistant.Core\TextEntryAssistant.Core.csproj", "{E14B9E04-8F0E-4472-9860-AEE4A1DD255C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextEntryAssistant.Windows", "src\TextEntryAssistant.Windows\TextEntryAssistant.Windows.csproj", "{112DFFEC-D40E-4B5B-AE30-D97369FC9C3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextEntryAssistant.App", "src\TextEntryAssistant.App\TextEntryAssistant.App.csproj", "{08F1C7D6-00C7-41B6-A68A-521473A0B576}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{270E9AE0-888D-4045-9AAC-2545AC2D30B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextEntryAssistant.Core.Tests", "tests\TextEntryAssistant.Core.Tests\TextEntryAssistant.Core.Tests.csproj", "{B8239FC3-3A39-4200-809D-9FFCB5653AB2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "prototypes", "prototypes", "{62A2CDF1-4568-4E13-A3A5-94C28A14E709}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SendInputPrototype", "prototypes\SendInputPrototype\SendInputPrototype.csproj", "{22696D9E-406E-4022-8996-AD326B9AD188}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E14B9E04-8F0E-4472-9860-AEE4A1DD255C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E14B9E04-8F0E-4472-9860-AEE4A1DD255C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E14B9E04-8F0E-4472-9860-AEE4A1DD255C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E14B9E04-8F0E-4472-9860-AEE4A1DD255C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{112DFFEC-D40E-4B5B-AE30-D97369FC9C3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{112DFFEC-D40E-4B5B-AE30-D97369FC9C3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{112DFFEC-D40E-4B5B-AE30-D97369FC9C3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{112DFFEC-D40E-4B5B-AE30-D97369FC9C3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08F1C7D6-00C7-41B6-A68A-521473A0B576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08F1C7D6-00C7-41B6-A68A-521473A0B576}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08F1C7D6-00C7-41B6-A68A-521473A0B576}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08F1C7D6-00C7-41B6-A68A-521473A0B576}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8239FC3-3A39-4200-809D-9FFCB5653AB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8239FC3-3A39-4200-809D-9FFCB5653AB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8239FC3-3A39-4200-809D-9FFCB5653AB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8239FC3-3A39-4200-809D-9FFCB5653AB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22696D9E-406E-4022-8996-AD326B9AD188}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22696D9E-406E-4022-8996-AD326B9AD188}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22696D9E-406E-4022-8996-AD326B9AD188}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22696D9E-406E-4022-8996-AD326B9AD188}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E14B9E04-8F0E-4472-9860-AEE4A1DD255C} = {AA31B39B-48A4-4EA1-B854-6A766658272D}
+		{112DFFEC-D40E-4B5B-AE30-D97369FC9C3B} = {AA31B39B-48A4-4EA1-B854-6A766658272D}
+		{08F1C7D6-00C7-41B6-A68A-521473A0B576} = {AA31B39B-48A4-4EA1-B854-6A766658272D}
+		{B8239FC3-3A39-4200-809D-9FFCB5653AB2} = {270E9AE0-888D-4045-9AAC-2545AC2D30B9}
+		{22696D9E-406E-4022-8996-AD326B9AD188} = {62A2CDF1-4568-4E13-A3A5-94C28A14E709}
+	EndGlobalSection
+EndGlobal

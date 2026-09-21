@@ -1,0 +1,31 @@
+name: build
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.425
+      - name: Build
+        run: dotnet build TextEntryAssistant.sln --configuration Release --nologo
+      - name: Core tests
+        run: dotnet run --project tests/TextEntryAssistant.Core.Tests --configuration Release --no-build
+      - name: Publish portable package
+        shell: pwsh
+        run: ./scripts/package.ps1
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: TextEntryAssistant-win-x64
+          path: |
+            artifacts/*.zip
+            artifacts/*.sha256

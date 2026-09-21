@@ -1,0 +1,105 @@
+<Window x:Class="TextEntryAssistant.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="文字输入助手" Width="780" Height="680" MinWidth="620" MinHeight="560"
+        WindowStartupLocation="CenterScreen" Background="#F8FAFC">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#1E293B" />
+        </Style>
+        <Style TargetType="GroupBox">
+            <Setter Property="Margin" Value="0,0,0,12" />
+            <Setter Property="Padding" Value="12" />
+        </Style>
+    </Window.Resources>
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,16">
+            <TextBlock Text="文字输入助手" FontSize="28" FontWeight="SemiBold" />
+            <TextBlock Text="把准备好的文字发送到当前光标位置" Margin="0,4,0,0" Foreground="#64748B" />
+        </StackPanel>
+
+        <GroupBox Grid.Row="1" Header="准备文字">
+            <Grid>
+                <TextBox x:Name="ContentBox" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
+                         FontSize="16" Padding="10" VerticalContentAlignment="Top" TextChanged="ContentBox_TextChanged" />
+                <TextBlock x:Name="ContentPlaceholder" Text="正文只保存在本次运行的内存中，不会写入设置或上传。"
+                           IsHitTestVisible="False" Foreground="#94A3B8" Margin="12,12,0,0" />
+            </Grid>
+        </GroupBox>
+
+        <Grid Grid.Row="2" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="120" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="换行策略" VerticalAlignment="Center" Margin="0,0,8,0" />
+            <ComboBox x:Name="NewlineModeBox" Grid.Column="1" SelectedIndex="0" Padding="5">
+                <ComboBoxItem Content="遇到换行时暂停并询问" Tag="Pause" />
+                <ComboBoxItem Content="直接发送 Enter" Tag="Enter" />
+                <ComboBoxItem Content="发送 Shift+Enter" Tag="ShiftEnter" />
+            </ComboBox>
+            <TextBlock Grid.Column="2" Text="间隔（毫秒）" VerticalAlignment="Center" Margin="18,0,8,0" />
+            <TextBox x:Name="IntervalBox" Grid.Column="3" Text="35" Padding="5" VerticalContentAlignment="Center" />
+        </Grid>
+
+        <GroupBox Grid.Row="3" Header="全局快捷键">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="180" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="开始 / 继续" VerticalAlignment="Center" />
+                <TextBox x:Name="StartHotkeyBox" Grid.Column="1" Text="Ctrl+Alt+I" Padding="5" />
+                <TextBlock Grid.Column="2" Text="在目标应用前台时按下，工具会捕获目标并开始。" Foreground="#64748B" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="1" Text="暂停 / 恢复" VerticalAlignment="Center" />
+                <TextBox x:Name="PauseHotkeyBox" Grid.Row="1" Grid.Column="1" Text="Ctrl+Alt+P" Padding="5" />
+                <TextBlock Grid.Row="1" Grid.Column="2" Text="恢复前会重新检查目标窗口和焦点。" Foreground="#64748B" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="2" Text="紧急停止" VerticalAlignment="Center" />
+                <TextBox x:Name="StopHotkeyBox" Grid.Row="2" Grid.Column="1" Text="Ctrl+Alt+Esc" Padding="5" />
+                <TextBlock Grid.Row="2" Grid.Column="2" Text="只停止后续批次，已提交系统的事件无法撤回。" Foreground="#64748B" VerticalAlignment="Center" />
+                <CheckBox x:Name="PauseOnTabBox" Grid.Row="3" Grid.ColumnSpan="3" Content="遇到 Tab 时暂停询问（推荐）" IsChecked="True" Margin="0,8,0,4" />
+                <StackPanel Grid.Row="4" Grid.ColumnSpan="3" Orientation="Horizontal">
+                    <Button Content="应用快捷键" Click="ApplyHotkeys_Click" />
+                    <TextBlock x:Name="HotkeyStatus" VerticalAlignment="Center" Foreground="#64748B" />
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+        <StackPanel Grid.Row="4">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                <Button Content="捕获当前目标" Click="CaptureTarget_Click" />
+                <Button x:Name="StartButton" Content="开始输入" Click="StartButton_Click" Background="{StaticResource AccentBrush}" Foreground="White" />
+                <Button x:Name="PauseButton" Content="暂停 / 恢复" Click="PauseButton_Click" IsEnabled="False" />
+                <Button x:Name="StopButton" Content="紧急停止" Click="StopButton_Click" IsEnabled="False" />
+            </StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="目标" FontWeight="SemiBold" Margin="0,0,8,0" />
+                <TextBlock x:Name="TargetLabel" Grid.Column="1" Text="尚未捕获；也可直接在目标应用前台按开始快捷键。" TextWrapping="Wrap" Foreground="#64748B" />
+            </Grid>
+            <ProgressBar x:Name="ProgressBar" Height="8" Margin="0,10,0,4" Minimum="0" Maximum="1" />
+            <TextBlock x:Name="StatusLabel" Text="就绪" Foreground="#475569" />
+        </StackPanel>
+    </Grid>
+</Window>
