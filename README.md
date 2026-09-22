@@ -4,7 +4,7 @@
 
 ## 当前版本
 
-`v0.1.0-preview.3`。这是预览版：核心状态机、Unicode `SendInput` 后端、目标窗口检查、全局快捷键和 WPF 界面已经实现，兼容性仍以[记录](docs/compatibility.md)为准。
+`v0.1.0-preview.4`。这是预览版：核心状态机、Unicode `SendInput` 后端、目标窗口检查、全局快捷键和 WPF 界面已经实现，兼容性仍以[记录](docs/compatibility.md)为准。
 
 ## 构建和启动
 
