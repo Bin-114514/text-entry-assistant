@@ -40,7 +40,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="300" />
             </Grid.ColumnDefinitions>
             <TextBlock Text="换行策略" VerticalAlignment="Center" Margin="0,0,8,0" />
             <ComboBox x:Name="NewlineModeBox" Grid.Column="1" SelectedIndex="0" Padding="5">
@@ -48,8 +48,22 @@
                 <ComboBoxItem Content="直接发送 Enter" Tag="Enter" />
                 <ComboBoxItem Content="发送 Shift+Enter" Tag="ShiftEnter" />
             </ComboBox>
-            <TextBlock Grid.Column="2" Text="间隔（毫秒）" VerticalAlignment="Center" Margin="18,0,8,0" />
-            <TextBox x:Name="IntervalBox" Grid.Column="3" Text="35" Padding="5" VerticalContentAlignment="Center" />
+            <TextBlock Grid.Column="2" Text="输入速度" VerticalAlignment="Center" Margin="18,0,8,0" />
+            <Grid Grid.Column="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="92" />
+                </Grid.ColumnDefinitions>
+                <Slider x:Name="IntervalSlider" Minimum="0" Maximum="500" Value="35"
+                        TickFrequency="25" IsSnapToTickEnabled="False"
+                        VerticalAlignment="Center" ValueChanged="IntervalSlider_ValueChanged"
+                        ToolTip="间隔越小，输入越快；滑条用于快速调节 0 到 500 毫秒。" />
+                <TextBlock Grid.Column="1" Text="间隔" VerticalAlignment="Center" Margin="10,0,6,0" />
+                <TextBox x:Name="IntervalBox" Grid.Column="2" Text="35" Padding="5"
+                         VerticalContentAlignment="Center" LostFocus="IntervalBox_LostFocus"
+                         ToolTip="可直接输入 0 到 5000 毫秒；0 毫秒为最快。" />
+            </Grid>
         </Grid>
 
         <GroupBox Grid.Row="3" Header="全局快捷键">

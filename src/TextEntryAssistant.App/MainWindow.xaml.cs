@@ -1,6 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using System.Globalization;
 using TextEntryAssistant.Core;
 using TextEntryAssistant.Windows;
 
@@ -16,6 +17,7 @@ public partial class MainWindow : Window
     private HotkeyDefinition? _pauseHotkey;
     private HotkeyDefinition? _stopHotkey;
     private bool _closing;
+    private bool _updatingIntervalControl;
 
     public MainWindow()
     {
@@ -154,6 +156,22 @@ public partial class MainWindow : Window
     private void ContentBox_TextChanged(object sender, TextChangedEventArgs e)
     {
         ContentPlaceholder.Visibility = string.IsNullOrEmpty(ContentBox.Text) ? Visibility.Visible : Visibility.Collapsed;
+    }
+
+    private void IntervalSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+    {
+        if (_updatingIntervalControl || IntervalBox is null) return;
+        _updatingIntervalControl = true;
+        IntervalBox.Text = Math.Round(e.NewValue).ToString(CultureInfo.InvariantCulture);
+        _updatingIntervalControl = false;
+    }
+
+    private void IntervalBox_LostFocus(object sender, RoutedEventArgs e)
+    {
+        if (!int.TryParse(IntervalBox.Text, out var milliseconds) || milliseconds is < 0 or > 5000) return;
+        _updatingIntervalControl = true;
+        IntervalSlider.Value = Math.Min(milliseconds, (int)IntervalSlider.Maximum);
+        _updatingIntervalControl = false;
     }
 
     private void CaptureTarget()
