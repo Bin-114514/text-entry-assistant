@@ -25,6 +25,13 @@ public enum NewlineMode
     ShiftEnter
 }
 
+public enum InputSpeedMode
+{
+    Compatible,
+    Balanced,
+    Fastest
+}
+
 public enum BreakDecision
 {
     Enter,
@@ -44,7 +51,8 @@ public sealed record InputTargetSnapshot(
 public sealed record InputSettings(
     TimeSpan Interval,
     NewlineMode NewlineMode = NewlineMode.Pause,
-    bool PauseOnTab = true)
+    bool PauseOnTab = true,
+    InputSpeedMode SpeedMode = InputSpeedMode.Balanced)
 {
     public static InputSettings Default { get; } = new(TimeSpan.FromMilliseconds(35));
 }

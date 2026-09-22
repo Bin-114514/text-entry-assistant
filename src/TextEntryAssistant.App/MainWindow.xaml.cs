@@ -247,7 +247,10 @@ public partial class MainWindow : Window
         var mode = NewlineModeBox.SelectedItem is ComboBoxItem item && item.Tag is string tag
             ? Enum.Parse<NewlineMode>(tag)
             : NewlineMode.Pause;
-        settings = new InputSettings(TimeSpan.FromMilliseconds(milliseconds), mode, PauseOnTabBox.IsChecked == true);
+        var speedMode = SpeedModeBox.SelectedItem is ComboBoxItem speedItem && speedItem.Tag is string speedTag
+            ? Enum.Parse<InputSpeedMode>(speedTag)
+            : InputSpeedMode.Balanced;
+        settings = new InputSettings(TimeSpan.FromMilliseconds(milliseconds), mode, PauseOnTabBox.IsChecked == true, speedMode);
         return true;
     }
 

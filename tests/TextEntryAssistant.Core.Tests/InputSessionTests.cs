@@ -14,7 +14,7 @@ public sealed class InputSessionTests
         await session.StartAsync();
 
         TestAssert.Equal(InputSessionState.Completed, session.State);
-        TestAssert.SequenceEqual(["A", "😀", "B"], injector.Calls);
+        TestAssert.SequenceEqual(["A😀B"], injector.Calls);
         TestAssert.Equal(3, session.Progress.Completed);
     }
 
@@ -76,7 +76,7 @@ public sealed class InputSessionTests
         var injector = new RecordingInjector { ThrowOnCall = 2 };
         var probe = new RecordingProbe();
         using var session = new InputSession(injector, probe, static (_, _) => Task.CompletedTask);
-        session.Arm("ABC", probe.Target, new InputSettings(TimeSpan.Zero));
+        session.Arm("ABC", probe.Target, new InputSettings(TimeSpan.FromMilliseconds(1)));
 
         await session.StartAsync();
 

@@ -19,6 +19,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Margin="0,0,0,16">
@@ -66,7 +67,17 @@
             </Grid>
         </Grid>
 
-        <GroupBox Grid.Row="3" Header="全局快捷键">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,12">
+            <TextBlock Text="批量模式" VerticalAlignment="Center" Margin="0,0,8,0" />
+            <ComboBox x:Name="SpeedModeBox" Width="220" SelectedIndex="1" Padding="5">
+                <ComboBoxItem Content="兼容：16 个元素/批次" Tag="Compatible" />
+                <ComboBoxItem Content="平衡：64 个元素/批次（推荐）" Tag="Balanced" />
+                <ComboBoxItem Content="最快：256 个元素/批次" Tag="Fastest" />
+            </ComboBox>
+            <TextBlock Text="仅在间隔为 0 毫秒时合并连续文本；换行和 Tab 仍会切断批次。" Foreground="#64748B" VerticalAlignment="Center" Margin="12,0,0,0" />
+        </StackPanel>
+
+        <GroupBox Grid.Row="4" Header="全局快捷键">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -97,7 +108,7 @@
             </Grid>
         </GroupBox>
 
-        <StackPanel Grid.Row="4">
+        <StackPanel Grid.Row="5">
             <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
                 <Button Content="捕获当前目标" Click="CaptureTarget_Click" />
                 <Button x:Name="StartButton" Content="开始输入" Click="StartButton_Click" Background="{StaticResource AccentBrush}" Foreground="White" />

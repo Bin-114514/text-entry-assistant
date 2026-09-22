@@ -158,6 +158,26 @@ public sealed class InputSession : IDisposable
                     throw new InputSessionException("目标窗口或焦点已变化，输入已停止。");
 
                 var unit = _units[index];
+                if (unit.Kind == InputUnitKind.Text && _settings.Interval == TimeSpan.Zero)
+                {
+                    var batchSize = _settings.SpeedMode switch
+                    {
+                        InputSpeedMode.Compatible => 16,
+                        InputSpeedMode.Fastest => 256,
+                        _ => 64
+                    };
+                    var batch = new System.Text.StringBuilder();
+                    var end = index;
+                    while (end < _units.Count && end < index + batchSize && _units[end].Kind == InputUnitKind.Text)
+                    {
+                        batch.Append(_units[end].Value);
+                        end++;
+                    }
+                    await _injector.SendTextAsync(batch.ToString(), cancellationToken).ConfigureAwait(false);
+                    index = end - 1;
+                }
+                else
+                {
                 switch (unit.Kind)
                 {
                     case InputUnitKind.Text:
@@ -169,6 +189,7 @@ public sealed class InputSession : IDisposable
                     case InputUnitKind.Tab:
                         await SendTabAsync(cancellationToken).ConfigureAwait(false);
                         break;
+                }
                 }
 
                 lock (_gate) _progress = new InputProgress(index + 1, _units.Count);
